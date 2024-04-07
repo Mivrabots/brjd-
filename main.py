@@ -3,6 +3,9 @@ import discord
 from discord.ext import commands
 import os
 import sqlite3 
+import aiohttp
+import asyncio
+
 
 TOKEN = os.environ['TOKEN']
 
@@ -198,21 +201,25 @@ async def serverafkchannel(ctx):
     embed.add_field(name="AFK Channel", value=afk_channel.mention if afk_channel else "None", inline=True)
     await ctx.send(embed=embed)
 
-# Define an HTTP server endpoint to keep the bot alive
-async def keep_alive():
-    app = aiohttp.web.Application()
-    app.router.add_get('/', lambda _: aiohttp.web.Response(text="Bot is alive!"))
-    runner = aiohttp.web.AppRunner(app)
-    await runner.setup()
-    site = aiohttp.web.TCPSite(runner, '0.0.0.0', int(os.getenv('PORT', 8080)))  # Listen on all interfaces on PORT environment variable or default to 8080
-    await site.start()
 
-# Run the keep alive coroutine alongside the bot
-async def main():
-    await asyncio.gather(bot.start(TOKEN), keep_alive())
 
-# Run the main coroutine
-if __name__ == "__main__":
-    import asyncio
-    asyncio.run(main())
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+bot.run(TOKEN)
+
+
+
+
 
